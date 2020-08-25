@@ -18,7 +18,7 @@ class Gambler:
 
 
     def check_resign(self, initial_stake, stake):
-        if stake <= initial_stake // 2 or stake >= initial_stake // 2:
+        if stake <= initial_stake // 2 or stake >= initial_stake + (initial_stake // 2):
             return True
         return False
 
@@ -28,6 +28,11 @@ class Gambler:
             print("Win Money on", day, "day is", win_money)
             print("Money Lost on", day, "day is", loss_money)
             print()
+
+
+    def stake_difference(self, previous_stake, current_stake):
+        return current_stake - previous_stake
+
 
 gambler = Gambler()
 initial_stake = gambler.start_gamble()
@@ -47,6 +52,13 @@ while days <= 29:
             loss_money += 1
         if gambler.check_resign(initial_stake, stake):
             break
+    if gambler.stake_difference(initial_stake, stake) > 0:
+        print("Won Money on day",days,"is", gambler.stake_difference(initial_stake, stake))
+    else:
+        print("Lost Money on day",days ,"is", -1 * gambler.stake_difference(initial_stake, stake))
+    initial_stake = stake
+    # if stake <= 0:
+    #     break
     gambler.print_money(days, win_money, loss_money)
     win_money = 0
     loss_money = 0

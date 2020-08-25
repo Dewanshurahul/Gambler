@@ -49,7 +49,7 @@ class Gambler:
 
 
 gambler = Gambler()
-initial_stake = gambler.start_gamble()
+next_month_check = initial_stake = gambler.start_gamble()
 stake = initial_stake
 days = 0
 win_money = 0
@@ -79,6 +79,8 @@ while days <= 29:
     gambler.print_money(days, win_money, loss_money)
     win_money = 0
     loss_money = 0
+    if next_month_check > initial_stake and days == 30:
+        continue
 #     print("Stake on", days," day", initial_stake)
 # print(days)
 print("Lucky Day", lucky_day)

@@ -1,3 +1,5 @@
+import random
+
 class Gambler:
 
     def start_gamble(self):
@@ -14,6 +16,11 @@ class Gambler:
         stake -= 1
         return stake
 
+
+    def check_resign(self, initial_stake, stake):
+        if stake <= initial_stake // 2 or stake >= initial_stake // 2:
+            return True
+        return False
 
 gambler = Gambler()
 initial_stake = gambler.start_gamble()

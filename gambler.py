@@ -34,12 +34,27 @@ class Gambler:
         return current_stake - previous_stake
 
 
+    def find_lucky_unlucky(self, diction):
+        win = []
+        loss = []
+        for key in diction:
+            win.append(diction.get(key)[0])
+            loss.append(diction.get(key)[1])
+        for key in diction:
+            if max(win) == diction.get(key)[0]:
+                lucky = key
+            if min(loss) == diction.get(key)[1]:
+                unlucky = key
+        return lucky, unlucky
+
+
 gambler = Gambler()
 initial_stake = gambler.start_gamble()
 stake = initial_stake
 days = 0
 win_money = 0
 loss_money = 0
+luck_determine = {}
 while days <= 29:
     days += 1
     while True:
@@ -56,6 +71,8 @@ while days <= 29:
         print("Won Money on day",days,"is", gambler.stake_difference(initial_stake, stake))
     else:
         print("Lost Money on day",days ,"is", -1 * gambler.stake_difference(initial_stake, stake))
+    luck_determine[days] = [win_money, loss_money]
+    lucky_day, unlucky_day = gambler.find_lucky_unlucky(luck_determine)
     initial_stake = stake
     # if stake <= 0:
     #     break
@@ -64,3 +81,5 @@ while days <= 29:
     loss_money = 0
 #     print("Stake on", days," day", initial_stake)
 # print(days)
+print("Lucky Day", lucky_day)
+print("Unlucky Day",unlucky_day)

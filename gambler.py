@@ -22,5 +22,11 @@ class Gambler:
             return True
         return False
 
+
+    def print_money(self, day, win_money, loss_money):
+        if day >=20:
+            print("Win Money on", day, "day is", win_money)
+            print("Money Lost on", day, "day is", loss_money)
+            
 gambler = Gambler()
 initial_stake = gambler.start_gamble()

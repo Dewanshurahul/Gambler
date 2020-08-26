@@ -73,11 +73,11 @@ def play():
             print("Lost Money on day",days ,"is", -1 * gambler.stake_difference(initial_stake, stake))
         luck_determine[days] = [win_money, loss_money]
         lucky_day, unlucky_day = gambler.find_lucky_unlucky(luck_determine)
-        initial_stake = stake
+        initial_stake = stake + 100
         gambler.print_money(days, win_money, loss_money)
         win_money = 0
         loss_money = 0
-        if next_month_check > initial_stake and days == 30:
+        if next_month_check > stake and days == 30:
             continue
     print("Lucky Day", lucky_day)
     print("Unlucky Day",unlucky_day)

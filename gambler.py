@@ -1,27 +1,24 @@
 import random
 
+
 class Gambler:
 
     def start_gamble(self):
         stake = 100
         return stake
 
-
     def win(self, stake):
         stake += 1
         return stake
-
 
     def loose(self, stake):
         stake -= 1
         return stake
 
-
     def check_resign(self, initial_stake, stake):
         if stake <= initial_stake // 2 or stake >= initial_stake + (initial_stake // 2):
             return True
         return False
-
 
     def print_money(self, day, win_money, loss_money):
         if day > 20:
@@ -29,10 +26,8 @@ class Gambler:
             print("Money Lost on", day, "day is", loss_money)
             print()
 
-
     def stake_difference(self, previous_stake, current_stake):
         return current_stake - previous_stake
-
 
     def find_lucky_unlucky(self, diction):
         win = []
@@ -46,6 +41,7 @@ class Gambler:
             if min(loss) == diction.get(key)[1]:
                 unlucky = key
         return lucky, unlucky
+
 
 def play():
     gambler = Gambler()
@@ -68,17 +64,25 @@ def play():
             if gambler.check_resign(initial_stake, stake):
                 break
         if gambler.stake_difference(initial_stake, stake) > 0:
-            print("Won Money on day",days,"is", gambler.stake_difference(initial_stake, stake))
+            print("Won Money on day", days, "is", gambler.stake_difference(initial_stake, stake))
         else:
-            print("Lost Money on day",days ,"is", -1 * gambler.stake_difference(initial_stake, stake))
+            print("Lost Money on day", days, "is", -1 * gambler.stake_difference(initial_stake, stake))
         luck_determine[days] = [win_money, loss_money]
         lucky_day, unlucky_day = gambler.find_lucky_unlucky(luck_determine)
         initial_stake = stake + 100
         gambler.print_money(days, win_money, loss_money)
         win_money = 0
         loss_money = 0
-        if next_month_check > stake and days == 30:
+        if next_month_check < stake and days == 30:
+            print("Won in the Month and Playing for next month", stake)
+            initial_stake = 100
+            days = 0
+            win_money = 0
+            loss_money = 0
+            luck_determine = {}
             continue
     print("Lucky Day", lucky_day)
-    print("Unlucky Day",unlucky_day)
+    print("Unlucky Day", unlucky_day)
+
+
 play()
